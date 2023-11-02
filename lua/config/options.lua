@@ -42,10 +42,11 @@ vim.opt.relativenumber = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.g.material_style = "deep ocean"
-vim.cmd [[colorscheme material]]
+-- vim.g.material_style = "deep ocean"
+-- vim.cmd [[colorscheme material]]
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
-
+-- theme
+vim.cmd("colorscheme onedark_vivid")

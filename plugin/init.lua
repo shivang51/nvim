@@ -100,10 +100,16 @@ require('packer').startup(function(use)
 
   use { "mfussenegger/nvim-jdtls"}
 
-  use {'romgrk/barbar.nvim', wants = 'nvim-web-devicons'}
-
   use {
     "windwp/nvim-autopairs",
+  }
+
+  use {
+    'akinsho/flutter-tools.nvim',
+    requires = {
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
   }
 
   if is_bootstrap then
@@ -125,7 +131,7 @@ if is_bootstrap then
 end
 
 -- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
+-- pcall(require('telescope').load_extension, 'fzf')
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
@@ -135,16 +141,17 @@ require('nvim-autopairs').setup({
 })
 
 -- Turn on lsp status information
-require('fidget').setup()
+-- require('fidget').setup()
 
 -- Enable Comment.nvim
 require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
+require('ibl').setup {
+  indent = {
+    char = '┊'
+  }
 }
 
 -- Gitsigns
@@ -220,7 +227,7 @@ end
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'lua_ls', 'gopls' }
+local servers = { 'clangd', 'rust_analyzer', 'lua_ls', 'gopls' }
 
 require'cmp'.setup {
   sources = {
@@ -254,3 +261,7 @@ require'lspconfig'.lua_ls.setup {
     }
 }
 
+require("telescope").load_extension("flutter")
+require("flutter-tools").setup{
+   flutter_path = "/usr/bin/flutter"
+}
