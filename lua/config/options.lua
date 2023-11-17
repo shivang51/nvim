@@ -44,7 +44,6 @@ vim.g.loaded_netrwPlugin = 1
 
 -- vim.g.material_style = "deep ocean"
 -- vim.cmd [[colorscheme material]]
-
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4

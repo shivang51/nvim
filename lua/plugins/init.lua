@@ -1,2 +1,2 @@
-require "plugins.lualine"
-require "plugins.nvim-treesitter"
+require("plugins.packer")
+require("plugins.setup")
