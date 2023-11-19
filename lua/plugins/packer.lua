@@ -115,6 +115,27 @@ require('packer').startup(function(use)
   use { 'mhartington/formatter.nvim' }
   -- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
+  use {
+    "nvim-neorg/neorg",
+    config = function()
+        require('neorg').setup {
+            load = {
+                ["core.defaults"] = {}, -- Loads default behaviour
+                ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                ["core.dirman"] = { -- Manages Neorg workspaces
+                    config = {
+                        workspaces = {
+                            notes = "~/notes",
+                        },
+                    },
+                },
+            },
+        }
+    end,
+    run = ":Neorg sync-parsers",
+    requires = "nvim-lua/plenary.nvim",
+  }
+
   if is_bootstrap then
     require('packer').sync()
   end

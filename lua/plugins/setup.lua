@@ -62,4 +62,8 @@ require "plugins.nvim-treesitter"
 
 require "plugins.formatter"
 
-
+require('neorg').setup {
+    load = {
+        ["core.defaults"] = {}
+    }
+}
