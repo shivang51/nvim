@@ -22,13 +22,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	command = "Format",
 	group = formatter_group,
 	pattern = "*",
-	callback = function()
-		if vim.bo.filetype ~= "norg" then
-			return
-		end
-	end,
 })
-
+	-- callback = function()
+	-- 	if vim.bo.filetype ~= "norg" then
+	-- 		return
+	-- 	end
+	-- end,
+	--
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	pattern = { "*.norg" },
 	command = "set conceallevel=3",

@@ -67,3 +67,6 @@ require "plugins.formatter"
 --         ["core.defaults"] = {}
 --     }
 -- }
+--
+require('nvim-ts-autotag').setup{}
+

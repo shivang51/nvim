@@ -137,6 +137,17 @@ require('packer').startup(function(use)
     requires = "nvim-lua/plenary.nvim",
   }
 
+  use {"windwp/nvim-ts-autotag"}
+
+  use({
+    "kylechui/nvim-surround",
+    tag = "*",
+    config = function()
+      require("nvim-surround").setup({
+      })
+    end
+  })
+
   if is_bootstrap then
     require('packer').sync()
   end
