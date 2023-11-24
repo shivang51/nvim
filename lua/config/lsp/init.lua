@@ -51,3 +51,9 @@ require'lspconfig'.lua_ls.setup {
     }
 }
 
+require'flutter-tools'.setup {
+  lsp = {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+}

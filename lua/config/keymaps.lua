@@ -37,3 +37,6 @@ vim.keymap.set('n', '<A-.>', '<Cmd>BufferNext<CR>', {desc="[A] Move to next buff
 vim.keymap.set('n', '<A-<>', '<Cmd>BufferMovePrevious<CR>', {desc="[A] move buffer to the left", noremap=true, silent=true})
 vim.keymap.set('n', '<A->>', '<Cmd>BufferMoveNext<CR>', {desc="[A] move buffer to the right", noremap=true, silent=true})
 
+vim.keymap.set('n', '{', "{zz", {desc="Move para up and center", noremap=true, silent=true})
+vim.keymap.set('n', '}', "}zz", {desc="Move para down and center", noremap=true, silent=true})
+
