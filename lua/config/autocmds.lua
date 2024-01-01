@@ -9,28 +9,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup("Packer", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePost", {
-	command = "source init.lua | PackerCompile",
-	group = packer_group,
-	pattern = vim.fn.expand("$MYVIMRC"),
-})
-
-
-
-local formatter_group = vim.api.nvim_create_augroup("FormatAutogroup", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-	command = "Format",
-	group = formatter_group,
-	pattern = "*",
-})
-	-- callback = function()
-	-- 	if vim.bo.filetype ~= "norg" then
-	-- 		return
-	-- 	end
-	-- end,
-	--
+-- callback = function()
+-- 	if vim.bo.filetype ~= "norg" then
+-- 		return
+-- 	end
+-- end,
+--
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	pattern = { "*.norg" },
 	command = "set conceallevel=3",

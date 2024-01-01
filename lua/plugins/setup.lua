@@ -1,5 +1,5 @@
 require("mason").setup()
-
+require("mason-nvim-dap").setup()
 require("nvim-autopairs").setup({
 	disable_filetype = { "TelescopePrompt", "vim" },
 })
@@ -61,7 +61,6 @@ require("plugins.nvim-treesitter")
 -- })
 --
 
-require("plugins.formatter")
 --
 -- require('neorg').setup {
 --     load = {
@@ -70,3 +69,6 @@ require("plugins.formatter")
 -- }
 --
 require("nvim-ts-autotag").setup({})
+
+require("plugins.dap")
+require("nvim-tree").setup()

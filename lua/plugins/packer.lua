@@ -31,11 +31,15 @@ require("packer").startup(function(use)
 		end,
 	})
 
+
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
 			"hrsh7th/cmp-nvim-lsp",
 			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-emoji",
+			"chrisgrieser/cmp-nerdfont",
+			"onsails/lspkind.nvim"
 		},
 		config = function()
 			require("config.lua-cmp")
@@ -57,7 +61,6 @@ require("packer").startup(function(use)
 
 	use({
 		"nvim-treesitter/nvim-treesitter-context",
-		requires = "nvim-treesitter/nvim-context",
 	})
 
 	-- Git related plugins
@@ -80,14 +83,13 @@ require("packer").startup(function(use)
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 
-	--   'nvim-tree/nvim-tree.lua',
-	--   requires = {
-	--   'nvim-tree/nvim-web-devicons', -- optional, for file icons
-	--   },
-	--   tag = 'nightly' -- optional, updated every week. (see issue #1193)
-	-- }
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional, for file icons
+		},
+	})
 
-	-- MY INSTALLED PACKAGES
 	-- Colorizer
 	use({ "rrethy/vim-hexokinase", run = "make" })
 
@@ -105,8 +107,6 @@ require("packer").startup(function(use)
 		},
 	})
 
-	use({ "mhartington/formatter.nvim" })
-	-- use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
 	use({
 		"nvim-neorg/neorg",
@@ -139,6 +139,20 @@ require("packer").startup(function(use)
 			require("nvim-surround").setup()
 		end,
 	})
+
+	-- Debugging
+	use({
+		"mfussenegger/nvim-dap",
+		"jay-babu/mason-nvim-dap.nvim",
+	})
+
+	use({ "theHamsta/nvim-dap-virtual-text" })
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+	use({ "nvim-telescope/telescope-dap.nvim" })
+
+	use({ "catppuccin/nvim", as = "catppuccin" })
+	
+	use({"nvimtools/none-ls.nvim"})
 
 	if is_bootstrap then
 		require("packer").sync()

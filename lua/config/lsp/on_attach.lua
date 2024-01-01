@@ -1,4 +1,6 @@
-local on_attach = function(_, bufnr)
+local formatter_group = vim.api.nvim_create_augroup("FormatAutogroup", { clear = false })
+
+local on_attach = function(client, bufnr)
 	-- NOTE: Remember that lua is a real programming language, and as such it is possible
 	-- to define small helper and utility functions so you don't have to repeat yourself
 	-- many times.
@@ -43,6 +45,23 @@ local on_attach = function(_, bufnr)
 			vim.lsp.buf.formatting()
 		end
 	end, { desc = "Format current buffer with LSP" })
+
+	if client.supports_method("textDocument/formatting") then
+		vim.keymap.set("n", "<Leader>f", function()
+			vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+		end, { buffer = bufnr, desc = "[lsp] format" })
+
+		-- format on save
+		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = formatter_group })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			group = formatter_group,
+			callback = function()
+				vim.lsp.buf.format({ bufnr = bufnr, async = async })
+			end,
+			desc = "[lsp] format on save",
+		})
+	end
 end
 
 return on_attach
