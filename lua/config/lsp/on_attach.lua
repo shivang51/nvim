@@ -1,12 +1,6 @@
 local formatter_group = vim.api.nvim_create_augroup("FormatAutogroup", { clear = false })
 
-local on_attach = function(client, bufnr)
-	-- NOTE: Remember that lua is a real programming language, and as such it is possible
-	-- to define small helper and utility functions so you don't have to repeat yourself
-	-- many times.
-	--
-	-- In this case, we create a function that lets us more easily define mappings specific
-	-- for LSP related items. It sets the mode, buffer and description for us each time.
+local create_keymaps = function(bufnr)
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
@@ -36,15 +30,10 @@ local on_attach = function(client, bufnr)
 	nmap("<leader>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, "[W]orkspace [L]ist Folders")
+end
 
-	-- Create a command `:Format` local to the LSP buffer
-	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-		if vim.lsp.buf.format then
-			vim.lsp.buf.format()
-		elseif vim.lsp.buf.formatting then
-			vim.lsp.buf.formatting()
-		end
-	end, { desc = "Format current buffer with LSP" })
+local on_attach = function(client, bufnr)
+	create_keymaps(bufnr)
 
 	if client.supports_method("textDocument/formatting") then
 		vim.keymap.set("n", "<Leader>f", function()

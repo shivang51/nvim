@@ -7,11 +7,11 @@ cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format(),
 	},
-	window = {
-		completion = {
-			winhighlight = "CursorLine:MyPMenuSel",
-		},
-	},
+	-- window = {
+	-- 	completion = {
+	-- 		winhighlight = "CursorLine:MyPMenuSel",
+	-- 	},
+	-- },
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -47,7 +47,5 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		{ name = "nerdfont" },
-		{ name = "emoji" },
 	},
 })

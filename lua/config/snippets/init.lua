@@ -11,7 +11,9 @@ local func = ls.function_node
 local choice = ls.choice_node
 local dynamicn = ls.dynamic_node
 
-local date = function() return {os.date('%Y-%m-%d')} end
+local date = function()
+    return { os.date("%Y-%m-%d") }
+end
 
 ls.add_snippets(nil, {
     all = {
@@ -23,5 +25,5 @@ ls.add_snippets(nil, {
             func(date, {}),
         }),
     },
-    java = java_snips
+    java = java_snips,
 })

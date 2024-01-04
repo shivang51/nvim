@@ -1,4 +1,3 @@
--- Install packer
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -31,15 +30,12 @@ require("packer").startup(function(use)
 		end,
 	})
 
-
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
 			"hrsh7th/cmp-nvim-lsp",
 			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-emoji",
-			"chrisgrieser/cmp-nerdfont",
-			"onsails/lspkind.nvim"
+			"onsails/lspkind.nvim",
 		},
 		config = function()
 			require("config.lua-cmp")
@@ -68,27 +64,16 @@ require("packer").startup(function(use)
 	use("tpope/vim-rhubarb")
 	use("lewis6991/gitsigns.nvim")
 
-	use("navarasu/onedark.nvim") -- Theme inspired by Atom
-	use("marko-cerovac/material.nvim")
-	use("olimorris/onedarkpro.nvim")
-
-	use("nvim-lualine/lualine.nvim") -- Fancier statusline
+	use("nvim-lualine/lualine.nvim")        -- Fancier statusline
 	use("lukas-reineke/indent-blankline.nvim") -- Add indentation guides even on blank lines
-	use("numToStr/Comment.nvim") -- "gc" to comment visual regions/lines
-	use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
+	use("numToStr/Comment.nvim")            -- "gc" to comment visual regions/lines
+	use("tpope/vim-sleuth")                 -- Detect tabstop and shiftwidth automatically
 
 	-- Fuzzy Finder (files, lsp, etc)
 	use({ "nvim-telescope/telescope.nvim", branch = "0.1.x", requires = { "nvim-lua/plenary.nvim" } })
 
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
-
-	use({
-		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons", -- optional, for file icons
-		},
-	})
 
 	-- Colorizer
 	use({ "rrethy/vim-hexokinase", run = "make" })
@@ -106,7 +91,6 @@ require("packer").startup(function(use)
 			"stevearc/dressing.nvim", -- optional for vim.ui.select
 		},
 	})
-
 
 	use({
 		"nvim-neorg/neorg",
@@ -151,8 +135,8 @@ require("packer").startup(function(use)
 	use({ "nvim-telescope/telescope-dap.nvim" })
 
 	use({ "catppuccin/nvim", as = "catppuccin" })
-	
-	use({"nvimtools/none-ls.nvim"})
+
+	use({ "nvimtools/none-ls.nvim" })
 
 	if is_bootstrap then
 		require("packer").sync()

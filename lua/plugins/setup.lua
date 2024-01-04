@@ -51,24 +51,12 @@ require("flutter-tools").setup({
 	},
 })
 
-require("plugins.lualine")
-require("plugins.nvim-treesitter")
-
--- require('ufo').setup({
---     provider_selector = function(_, _, _)
---         return {'treesitter', 'indent'}
---     end
--- })
---
-
---
--- require('neorg').setup {
---     load = {
---         ["core.defaults"] = {}
---     }
--- }
---
 require("nvim-ts-autotag").setup({})
 
+require("plugins.lualine")
+
+require("plugins.nvim-treesitter")
+
 require("plugins.dap")
-require("nvim-tree").setup()
+
+require("plugins.none-ls")

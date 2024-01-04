@@ -1,30 +1,10 @@
 local on_attach = require("config.lsp.on_attach")
+local lspconfig = require("lspconfig")
 
-local servers = { "clangd", "rust_analyzer", "lua_ls", "gopls", "angularls", "tsserver" }
-
-require("cmp").setup({
-	sources = {
-		{ name = "nvim_lsp" },
-	},
-})
-
--- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-for _, lsp in ipairs(servers) do
-	require("lspconfig")[lsp].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
-end
-
-require("config.lsp.angularls")
-
--- Ensure the servers above are installed
-require("mason-lspconfig").setup({
-	ensure_installed = servers,
-})
+require("mason-lspconfig").setup({})
 
 require("mason-lspconfig").setup_handlers({
 	function(server_name)
@@ -33,14 +13,9 @@ require("mason-lspconfig").setup_handlers({
 			capabilities = capabilities,
 		})
 	end,
-	-- Next, you can provide a dedicated handler for specific servers.
-	-- For example, a handler override for the `rust_analyzer`:
-	--     ["rust_analyzer"] = function ()
-	--         require("rust-tools").setup {}
-	--     end_
 })
 
-require("lspconfig").lua_ls.setup({
+lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -50,9 +25,25 @@ require("lspconfig").lua_ls.setup({
 	},
 })
 
+lspconfig.ccls.setup({
+	init_options = {
+		cache = {
+			directory = ".ccls-cache",
+		},
+	},
+})
+
+lspconfig.clangd.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = { "clangd", "--completion-style=detailed" },
+})
+
 require("flutter-tools").setup({
 	lsp = {
 		on_attach = on_attach,
 		capabilities = capabilities,
 	},
 })
+
+require("config.lsp.angularls")
