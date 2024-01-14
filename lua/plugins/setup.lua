@@ -46,9 +46,11 @@ require("telescope").setup({
 require("telescope").load_extension("flutter")
 
 require("flutter-tools").setup({
-	flutter_path = os.getenv("FLUTTER_BIN").."/flutter",
+	flutter_path = "/home/shivang/Work/Tools/flutter/bin/flutter",
 	decorations = {
-		device = true,
+		statusline = {
+			device = true,
+		},
 	},
 })
 

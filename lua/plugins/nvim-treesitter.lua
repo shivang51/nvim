@@ -2,7 +2,7 @@
 -- See `:help nvim-treesitter`
 
 require("nvim-treesitter.configs").setup({
-	ensure_installed = { "c", "cpp", "go", "html", "lua", "java", "python", "rust", "typescript" },
+	ensure_installed = { "c", "cpp", "html", "lua", "java", "python", "rust", "typescript" },
 	modules = {},
 	auto_install = true,
 	sync_install = true,
@@ -14,7 +14,7 @@ require("nvim-treesitter.configs").setup({
 		enable_close_on_slash = true,
 	},
 	highlight = { enable = true },
-	indent = { enable = true },
+	indent = { enable = true, disable = { "dart" } },
 	incremental_selection = {
 		enable = true,
 		keymaps = {

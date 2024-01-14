@@ -1,10 +1,10 @@
 local jdtls_ok, jdtls = pcall(require, "jdtls")
 if not jdtls_ok then
-  vim.notify "JDTLS not found, install with `:LspInstall jdtls`"
+  vim.notify("JDTLS not found, install with `:LspInstall jdtls`")
   return
 end
 
-local HOME = os.getenv "HOME"
+local HOME = os.getenv("HOME")
 -- Installation location of jdtls by nvim-lsp-installer
 local JDTLS_LOCATION = HOME .. "/.java/jdt-language-server-1.9.0-202203031534"
 
@@ -13,7 +13,7 @@ local WORKSPACE_PATH = "/home/shivang/.jdtls_workspace/"
 
 -- Only for Linux and Mac
 local SYSTEM = "linux"
-if vim.fn.has "mac" == 1 then
+if vim.fn.has("mac") == 1 then
   SYSTEM = "mac"
 end
 
@@ -28,7 +28,6 @@ end
 
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
-
 
 local config = {
   cmd = {
@@ -81,7 +80,7 @@ local config = {
       format = {
         enabled = true,
         settings = {
-          url = vim.fn.stdpath "config" .. "/lang-servers/intellij-java-google-style.xml",
+          url = vim.fn.stdpath("config") .. "/lang-servers/intellij-java-google-style.xml",
           profile = "GoogleStyle",
         },
       },
@@ -133,7 +132,6 @@ local config = {
 jdtls.start_or_attach(config)
 
 -- Add the commands
-require("jdtls.setup").add_commands()
 -- vim.api.nvim_exec(
 --   [[
 -- command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_compile JdtCompile lua require('jdtls').compile(<f-args>)
@@ -145,4 +143,3 @@ require("jdtls.setup").add_commands()
 --   ]],
 --   false
 -- )
-

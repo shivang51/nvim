@@ -34,10 +34,9 @@ end
 
 local on_attach = function(client, bufnr)
 	create_keymaps(bufnr)
-
-	if client.supports_method("textDocument/formatting") then
+	if client.supports_method("textdocument/formatting") then
 		vim.keymap.set("n", "<Leader>fmt", function()
-			vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+			vim.lsp.buf.format()
 		end, { buffer = bufnr, desc = "[lsp] format" })
 
 		-- format on save

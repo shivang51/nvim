@@ -76,7 +76,7 @@ require("packer").startup(function(use)
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable("make") == 1 })
 
 	-- Colorizer
-	use({ "rrethy/vim-hexokinase", run = "make" })
+	use({ "rrethy/vim-hexokinase", run = "make hexokivimnase" })
 
 	use({ "mfussenegger/nvim-jdtls" })
 
