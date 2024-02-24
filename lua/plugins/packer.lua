@@ -59,6 +59,13 @@ require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter-context",
 	})
 
+	use({
+		"nvim-tree/nvim-tree.lua",
+		requires = {
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+	})
+
 	-- Git related plugins
 	use("tpope/vim-fugitive")
 	use("tpope/vim-rhubarb")

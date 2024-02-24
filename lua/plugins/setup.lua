@@ -4,6 +4,8 @@ require("nvim-autopairs").setup({
 	disable_filetype = { "TelescopePrompt", "vim" },
 })
 
+require("nvim-tree").setup()
+
 -- Turn on lsp status information
 -- require('fidget').setup()
 

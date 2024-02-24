@@ -56,3 +56,8 @@ vim.cmd.colorscheme("catppuccin")
 
 vim.api.nvim_set_hl(0, "Comment", { italic = true })
 vim.api.nvim_set_hl(0, "Keyword", { italic = true })
+
+vim.opt.linespace = 6
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

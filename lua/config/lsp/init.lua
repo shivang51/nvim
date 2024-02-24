@@ -25,14 +25,6 @@ lspconfig.lua_ls.setup({
 	},
 })
 
-lspconfig.ccls.setup({
-	init_options = {
-		cache = {
-			directory = ".ccls-cache",
-		},
-	},
-})
-
 lspconfig.clangd.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
