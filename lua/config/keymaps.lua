@@ -88,6 +88,5 @@ setkeymap({ "i" }, "jj", "<Esc>", { desc = "Return to normal mode" })
 setkeymap({ "n" }, "o", "o<Esc>zz", { desc = "Crete new line below" })
 setkeymap({ "n" }, "O", "O<Esc>zz", { desc = "Crete new line above" })
 
-setkeymap({ "n" }, "<Leader>ex", vim.cmd.Explore, { desc = "Open netrw" })
-setkeymap({ "n" }, "<Leader>vex", vim.cmd.Vexplore, { desc = "Open netrw in vertical split" })
+setkeymap({ "n" }, "<Leader>ex", vim.cmd.NvimTreeToggle, { desc = "Open Nvim Tree" })
 setkeymap({ "n" }, "<C-C>", '"+Y', { desc = "Copy contents to clipboard" })
