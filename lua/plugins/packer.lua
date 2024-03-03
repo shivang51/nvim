@@ -145,6 +145,8 @@ require("packer").startup(function(use)
 
 	use({ "nvimtools/none-ls.nvim" })
 
+	use({ "github/copilot.vim" })
+
 	if is_bootstrap then
 		require("packer").sync()
 	end
