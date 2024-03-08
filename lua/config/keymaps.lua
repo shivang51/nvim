@@ -90,3 +90,10 @@ setkeymap({ "n" }, "O", "O<Esc>zz", { desc = "Crete new line above" })
 
 setkeymap({ "n" }, "<Leader>ex", vim.cmd.NvimTreeToggle, { desc = "Open Nvim Tree" })
 setkeymap({ "n" }, "<C-C>", '"+Y', { desc = "Copy contents to clipboard" })
+
+-------- accept github copilot suggesstion when there is nvim-cmp confict -------
+setkeymap({ "i" }, "<C-j>", 'copilot#Accept("")', {
+	expr = true,
+	replace_keycodes = false,
+	desc = "Accept copilot suggesstion",
+})
