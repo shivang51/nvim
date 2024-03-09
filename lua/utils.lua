@@ -1,11 +1,9 @@
 local utils = {}
 
-function utils.map(mode, lhs, rhs, opts)
-    local options = { noremap = true }
-    if opts then
-        options = vim.tbl_extend("force", options, opts)
-    end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+function utils.make_italic(groupName)
+    local prev = vim.api.nvim_get_hl(0, { name = groupName })
+    local options = vim.tbl_extend("force", prev, { italic = true })
+    vim.api.nvim_set_hl(0, groupName, options)
 end
 
 return utils

@@ -3,6 +3,9 @@ local setkeymap = vim.keymap.set
 -- [[ Setting options ]]
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 setkeymap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- Remap for dealing with word wrap

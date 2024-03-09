@@ -1,3 +1,4 @@
+local utils = require("utils")
 -- See `:help vim.o`
 
 -- Set highlight on search
@@ -33,8 +34,6 @@ vim.o.completeopt = "menuone,noselect"
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 vim.opt.relativenumber = true
 
@@ -52,10 +51,12 @@ require("catppuccin").setup({
 
 vim.cmd("colorscheme catppuccin")
 
+utils.make_italic("Comment")
+utils.make_italic("Keyword")
+utils.make_italic("Parameter")
+utils.make_italic("TSParameter")
+utils.make_italic("@variable.parameter")
 -- vim.api.nvim_set_hl(0, "MyPMenuSel", { bg = "#202020" })
-
-vim.api.nvim_set_hl(0, "Comment", { italic = true })
-vim.api.nvim_set_hl(0, "Keyword", { italic = true })
 
 vim.opt.linespace = 6
 
