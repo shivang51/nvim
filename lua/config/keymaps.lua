@@ -1,102 +1,40 @@
-local setkeymap = vim.keymap.set
+vim.keymap.set("i", "jj", "<Esc>")
+vim.keymap.set({ "i", "n" }, "<C-s>", "<Cmd>w<CR>")
+vim.keymap.set("t", "<Esc><Esc>", "<c-\\><c-n>")
 
--- [[ Setting options ]]
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.keymap.set("n", "<C-M-t>", function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd("J")
+  vim.api.nvim_win_set_height(0, 8)
+end, { desc = "Open Terminal" })
 
-setkeymap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+-- lsp keymaps
+vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame" })
+vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[G]oto [D]efinition" })
+vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { desc = "[G]oto [R]eferences" })
+vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "[G]oto [I]mplementation" })
+vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Type [D]efinition" })
+vim.keymap.set("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, { desc = "[D]ocument [S]ymbols" })
+vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols,
+  { desc = "[W]orkspace [S]ymbols" })
 
--- Remap for dealing with word wrap
-setkeymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-setkeymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- See `:help telescope.builtin`
-setkeymap("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
-setkeymap("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
-setkeymap("n", "<leader>/", function()
-	-- You can pass additional configuration to telescope to change theme, layout, etc.
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
+vim.keymap.set("n", "<leader>/", function()
+  require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+    winblend = 10,
+    previewer = false,
+  }))
 end, { desc = "[/] Fuzzily search in current buffer]" })
 
-setkeymap("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Git Files Search" })
-setkeymap("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
-setkeymap("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
-setkeymap("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
-setkeymap("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
-setkeymap("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
+vim.keymap.set("n", "<space>sf", require('telescope.builtin').find_files, { desc = "[S]earch [F]iles" })
+vim.keymap.set("n", "<space><space>", require('telescope.builtin').buffers, { desc = "Search open buffers" })
+vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
+vim.keymap.set("n", "<leader>sgf", require("telescope.builtin").git_files, { desc = "[S]earch [G]it [F]iles" })
 
 -- Diagnostic keymaps
-setkeymap("n", "dp", vim.diagnostic.goto_prev, { desc = "Go to [D]iagnostics [P]revious" })
-setkeymap("n", "dn", vim.diagnostic.goto_next, { desc = "Go to [D]iagnostics [N]ext" })
-setkeymap("n", "df", vim.diagnostic.open_float, { desc = "Open [D]iagnostics [F]loating window" })
-setkeymap("n", "dq", vim.diagnostic.setloclist, { desc = "Set diagnostic loc list" })
-
--- Debugging
-setkeymap("n", "<F5>", function()
-	require("dap").continue()
-end)
-setkeymap("n", "<F10>", function()
-	require("dap").step_over()
-end)
-setkeymap("n", "<F11>", function()
-	require("dap").step_into()
-end)
-setkeymap("n", "<F12>", function()
-	require("dap").step_out()
-end)
-setkeymap("n", "<Leader>b", function()
-	require("dap").toggle_breakpoint()
-end)
-setkeymap("n", "<Leader>B", function()
-	require("dap").set_breakpoint()
-end)
-setkeymap("n", "<Leader>lp", function()
-	require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-end)
-setkeymap("n", "<Leader>dr", function()
-	require("dap").repl.open()
-end)
-setkeymap("n", "<Leader>dl", function()
-	require("dap").run_last()
-end)
-setkeymap({ "n", "v" }, "<Leader>dh", function()
-	require("dap.ui.widgets").hover()
-end)
-setkeymap({ "n", "v" }, "<Leader>dp", function()
-	require("dap.ui.widgets").preview()
-end)
-setkeymap("n", "<Leader>df", function()
-	local widgets = require("dap.ui.widgets")
-	widgets.centered_float(widgets.frames)
-end)
-setkeymap("n", "<Leader>ds", function()
-	local widgets = require("dap.ui.widgets")
-	widgets.centered_float(widgets.scopes)
-end)
-
-------- move and center ---------
-setkeymap("n", "{", "{zz", { desc = "Move para up and center", noremap = true, silent = true })
-setkeymap("n", "}", "}zz", { desc = "Move para down and center", noremap = true, silent = true })
-setkeymap("n", "G", "Gzz", { desc = "Move to eof and center", noremap = true, silent = true })
-
-setkeymap({ "n", "i" }, "<C-S>", "<Cmd>w<CR>", { desc = "Save the current buffer" })
-
-setkeymap({ "i" }, "jj", "<Esc>", { desc = "Return to normal mode" })
-
-setkeymap({ "n" }, "o", "o<Esc>zz", { desc = "Crete new line below" })
-setkeymap({ "n" }, "O", "O<Esc>zz", { desc = "Crete new line above" })
-
-setkeymap({ "n" }, "<Leader>ex", vim.cmd.NvimTreeToggle, { desc = "Open Nvim Tree" })
-setkeymap({ "n" }, "<C-C>", '"+Y', { desc = "Copy contents to clipboard" })
-
--------- accept github copilot suggesstion when there is nvim-cmp confict -------
-setkeymap({ "i" }, "<C-j>", 'copilot#Accept("")', {
-	expr = true,
-	replace_keycodes = false,
-	desc = "Accept copilot suggesstion",
-})
+vim.keymap.set("n", "dp", vim.diagnostic.goto_prev, { desc = "Go to [D]iagnostics [P]revious" })
+vim.keymap.set("n", "dn", vim.diagnostic.goto_next, { desc = "Go to [D]iagnostics [N]ext" })
+vim.keymap.set("n", "df", vim.diagnostic.open_float, { desc = "Open [D]iagnostics [F]loating window" })
+vim.keymap.set("n", "dq", vim.diagnostic.setloclist, { desc = "Set diagnostic loc list" })
