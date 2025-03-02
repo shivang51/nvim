@@ -21,12 +21,8 @@ vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_works
 	{ desc = "[W]orkspace [S]ymbols" })
 
 
-vim.keymap.set("n", "<leader>/", function()
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
-end, { desc = "[/] Fuzzily search in current buffer]" })
+vim.keymap.set("n", "<leader>/", require("telescope.builtin").current_buffer_fuzzy_find,
+	{ desc = "[/] Fuzzily search in current buffer]" })
 
 vim.keymap.set("n", "<space>sf", require('telescope.builtin').find_files, { desc = "[S]earch [F]iles" })
 vim.keymap.set("n", "<space><space>", require('telescope.builtin').buffers, { desc = "Search open buffers" })
@@ -40,7 +36,7 @@ vim.keymap.set("n", "df", vim.diagnostic.open_float, { desc = "Open [D]iagnostic
 vim.keymap.set("n", "dq", vim.diagnostic.setloclist, { desc = "Set diagnostic loc list" })
 
 -- switch between two buffers
-vim.keymap.set("n", "<c-tab>", "<c-^>", { desc = "Swith between two buffers" })
+vim.keymap.set("n", "<leader><TAB>", "<C-^>", { desc = "Switch between two buffers" })
 
 -- insert lines and escape
 vim.keymap.set({ "n" }, "o", "o<Esc>", { desc = "Create new line below" })
